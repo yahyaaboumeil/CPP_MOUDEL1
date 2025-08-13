@@ -15,23 +15,23 @@ bool    ReadInfo(stContactInfo &Info)
     std::cout << "\t" <<  "Read Info Screen\n";
     std::cout << "_____________________________\n";
     std::cout << "Pleas Enter First Name\n";
-    std::cin >> Info.FirstName;
+    getline(std::cin, Info.FirstName);
     if (std::cin.eof())
        return (false);
     std::cout << "Pleas Enter Last Name\n";
-    std::cin >> Info.LastName;
+    getline(std::cin, Info.LastName);
     if (std::cin.eof())
        return false;
     std::cout << "Pleas Enter Phone\n";
-    std::cin >> Info.Phone;
+    getline(std::cin, Info.Phone);
     if (std::cin.eof())
        return false;
     std::cout << "Pleas Enter Nick Name\n";
-    std::cin >> Info.NickName;
+    getline(std::cin, Info.NickName);
     if (std::cin.eof())
        return false;
     std::cout << "Pleas Enter DarkestSecret\n";
-    std::cin >> Info.DarkestSecret;
+    getline(std::cin, Info.DarkestSecret);
     if (std::cin.eof())
        return false;
     std::cout << "_____________________________\n";
@@ -42,17 +42,35 @@ void    ClsPhoneBook::AddContact()
 {
     stContactInfo Info;
     bool re;
+    short index = 0;
 
+    if (_index > 7)
+    {
+        short ans;
+
+        std::cout << "pleas enter the index fo contact do you want to replace it (0-7)?\n";
+        std::cin >> ans;
+        while (std::cin.fail() || !(ans >= 0 && ans <= 7) || std::cin.eof())
+        {
+            if (std::cin.eof())
+                return ;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "invalid choise try again\n"; 
+            std::cin >> ans;
+        }
+        index = ans;
+    }
+    else
+        index = _index;
    re = ReadInfo(Info);
-    // if (re == false)
-    //     return ;
-    _Contacts[_index].SetFirstName(Info.FirstName);
-    _Contacts[_index].SetLastName(Info.LastName);
-    _Contacts[_index].SetNickName(Info.NickName);
-    _Contacts[_index].SetPhone(Info.Phone);
-    _Contacts[_index].SetDarkestSecret(Info.DarkestSecret);
+    _Contacts[index].SetFirstName(Info.FirstName);
+    _Contacts[index].SetLastName(Info.LastName);
+    _Contacts[index].SetNickName(Info.NickName);
+    _Contacts[index].SetPhone(Info.Phone);
+    _Contacts[index].SetDarkestSecret(Info.DarkestSecret);
 
-    if (!_Contacts[_index].CheckIsEmtyObj())
+    if (!_Contacts[index].CheckIsEmtyObj())
         _index++; 
 }
 

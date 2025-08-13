@@ -6,6 +6,8 @@
 //                Made by : Brad "Buddy" McLane <bm@gbu.com>                  //
 //                                                                            //
 // ************************************************************************** //
+
+
 #pragma once
 #ifndef __ACCOUNT_H__
 #define __ACCOUNT_H__
@@ -50,6 +52,7 @@ private:
 	int				_nbDeposits;
 	int				_nbWithdrawals;
 
+	Account( void );
 
 };
 

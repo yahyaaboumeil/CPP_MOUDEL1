@@ -1,16 +1,22 @@
 #include "ClsPhoneBook.hpp" 
+#include <iostream>
+#include <string>
+#include <limits>
+#include <cctype> // for std::toupper
 
 std::string ReadChoice()
 {
-    std::string Ans;
-    // system("clear");
-    std::cout << "Pleas enter u choice ==>[ADD] || [SEARCH] || [EXIT] ?\n";
-    std::getline(std::cin, Ans);
+    std::string Ans = "";
 
+    std::cout << "Pleas enter u choice ==>[ADD] || [SEARCH] || [EXIT] ?\n";
+
+    std::getline(std::cin, Ans);
+    
     if (std::cin.eof())
         return "EXIT";
     for (int i = 0; Ans[i]; i++)
         Ans[i] = toupper(Ans[i]);
+    std::cout << "Ans = " << Ans << std::endl;
     return Ans; 
 }
 
